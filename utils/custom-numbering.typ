@@ -6,19 +6,19 @@
   }
   if (first-level != auto and args.pos().len() == 1) {
       if (first-level != "") {
-          numbering(first-level, ..args)
+          numbering(first-level, ..args)+ h(-0.3em)
       }
       return
   }
   if (second-level != auto and args.pos().len() == 2) {
       if (second-level != "") {
-          numbering(second-level, ..args)
+          numbering(second-level, ..args)+ h(-0.3em)
       }
       return
   }
   if (third-level != auto and args.pos().len() == 3) {
       if (third-level != "") {
-          numbering(third-level, ..args)
+          numbering(third-level, ..args)+ h(-0.3em)
       }
       return
   }

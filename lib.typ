@@ -4,6 +4,7 @@
 // 在线模板可能不会更新得很及时，如果需要最新版本，请关注 Repo
 
 #import "@preview/anti-matter:0.0.2": anti-inner-end as mainmatter-end
+// #import "@preview/anti-matter:0.1.1": anti-matter, fence, set-numbering,step
 #import "layouts/doc.typ": doc
 #import "layouts/preface.typ": preface
 #import "layouts/mainmatter.typ": mainmatter
@@ -32,7 +33,7 @@
 
 // 使用函数闭包特性，通过 `documentclass` 函数类进行全局信息配置，然后暴露出拥有了全局配置的、具体的 `layouts` 和 `templates` 内部函数。
 #let documentclass(
-  doctype: "bachelor",  // "bachelor" | "master" | "doctor" | "postdoc"，文档类型，默认为本科生 bachelor
+  doctype: "master",  // "bachelor" | "master" | "doctor" | "postdoc"，文档类型，默认为本科生 bachelor
   degree: "academic",  // "academic" | "professional"，学位类型，默认为学术型 academic
   nl-cover: false,  // TODO: 是否使用国家图书馆封面，默认关闭
   twoside: false,  // 双面模式，会加入空白页，便于打印
@@ -44,18 +45,25 @@
   // 默认参数
   fonts = 字体 + fonts
   info = (
-    title: ("基于 Typst 的", "南京大学学位论文"),
+    title: "基于 Typst 的123",
     title-en: "NJU Thesis Template for Typst",
+    Paper-number:"1234567890",
     grade: "20XX",
     student-id: "1234567890",
     author: "张三",
     author-en: "Zhang San",
+    Subject-categories:"工学",
+    Subject-categories-en:"Engineering",
+    First-level-discipline-name:"林业工程",
+    First-level-discipline-name-en:"Forestry Engineering",
     department: "某学院",
     department-en: "XX Department",
     major: "某专业",
     major-en: "XX Major",
     field: "某方向",
     field-en: "XX Field",
+    degree-type:"专业学位",
+    degree-type-en:"professional",
     supervisor: ("李四", "教授"),
     supervisor-en: "Professor Li Si",
     supervisor-ii: (),
@@ -67,14 +75,19 @@
     bottom-date: datetime.today(),
     chairman: "某某某 教授",
     reviewer: ("某某某 教授", "某某某 教授"),
-    clc: "O643.12",
+    clc: "",
     udc: "544.4",
     secret-level: "公开",
-    supervisor-contact: "南京大学 江苏省南京市栖霞区仙林大道163号",
+    supervisor-contact: "福建农林大学 福建省福州市仓山区上下店路15号",
     email: "xyz@smail.nju.edu.cn",
-    school-code: "10284",
+    school-code: "10389",
     degree: auto,
     degree-en: auto,
+    send-date : datetime(
+  year: 2024,
+  month: 10,
+  day: 4,
+),
   ) + info
 
   (
@@ -104,6 +117,7 @@
         mainmatter(
           twoside: twoside,
           display-header: true,
+           info: info + args.named().at("info", default: (:)),
           ..args,
           fonts: fonts + args.named().at("fonts", default: (:)),
         )

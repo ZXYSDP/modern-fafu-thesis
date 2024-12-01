@@ -18,34 +18,66 @@
   // 2.  正式渲染
   pagebreak(weak: true, to: if twoside { "odd" })
 
-  v(25pt)
+  v(73pt)
 
   align(
     center,
     text(
       font: fonts.黑体,
-      size: 字号.四号,
-      weight: "bold",
-      "南京大学学位论文原创性声明",
+      size: 字号.三号,
+      weight: 500,
+      "独创性声明",
     ),
   )
 
-  v(46pt)
+  v(28pt)
 
   block[
     #set text(font: fonts.宋体, size: 字号.小四)
     #set par(justify: true, first-line-indent: 2em, leading: 1.2em)
 
-    #indent 本人郑重声明，所提交的学位论文是本人在导师指导下独立进行科学研究工作所取得的成果。除本论文中已经注明引用的内容外，本论文不包含其他个人或集体已经发表或撰写过的研究成果，也不包含为获得南京大学或其他教育机构的学位证书而使用过的材料。对本文的研究做出重要贡献的个人和集体，均已在论文的致谢部分明确标明。本人郑重申明愿承担本声明的法律责任。    
+    #indent 本人声明，所呈交的学位（毕业）论文，是本人在指导教师的指导下独立完成的研究成果，并且是自己撰写的。尽我所知，除了文中作了标注和致谢中已作了答谢的地方外，论文中不包含其他人发表或撰写过的研究成果。与我一同对本研究做出贡献的同志，都在论文中作了明确的说明并表示了谢意，如被查有侵犯他人知识产权的行为，由本人承担应有的责任。   \
+      \
+    #indent 学位（毕业）论文作者亲笔签名：#h(7em)日期：
   ]
 
-  v(143pt)
+  v(48pt)
 
-  align(right)[
-    #set text(font: fonts.黑体, size: 字号.小四)
+align(
+    center,
+    text(
+      font: fonts.黑体,
+      size: 字号.三号,
+      weight: 500,
+      "论文使用授权的说明",
+    ),
+  )
+
+  v(29pt)
+  block[
+    #set text(font: fonts.宋体, size: 字号.小四)
+    #set par(justify: true, first-line-indent: 2em, leading: 1.2em)
+
+    #indent 本人完全了解福建农林大学有关保留、使用学位（毕业）论文的规定，即学校有权送交论文的复印件，允许论文被查阅和借阅; 学校可以公布论文的全部或部分内容，可以采用影印、缩印或其他复制手段保存论文。   \
+      \
+    #indent #h(12em)保密，在#h(2em)年后解密可适用本授权书。
+
+    #h(12em)不保密，本论文属于不保密。
+  ]
+  // align(right)[
+  //   #set text(font: fonts.黑体, size: 字号.小四)
     
-    研究生签名：#h(5.8em)
+  //   研究生签名：#h(5.8em)
 
-    日期：#h(5.8em)
+  //   日期：#h(5.8em)
+  // ]
+  v(27pt)
+  block[
+    #set text(font: fonts.宋体, size: 字号.小四)
+    #set par(justify: true, first-line-indent: 2em, leading: 1.2em)
+
+    #indent 学位（毕业）论文作者亲笔签名：#h(7em)日期：\
+\
+    #indent 指导教师亲笔签名：#h(13em)日期：
   ]
 }
