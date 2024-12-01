@@ -8,10 +8,10 @@
   twoside: false,
   fonts: (:),
   // 其他参数
-  depth: 4,
-  title: "目　　录",
+  depth: 3,
+  title: "目　录",
   outlined: false,
-  title-vspace: 0pt,
+  title-vspace: 52pt,
   title-text-args: auto,
   // 引用页数的字体，这里用于显示 Times New Roman
   reference-font: auto,
@@ -20,8 +20,9 @@
   font: auto,
   size: (字号.四号, 字号.小四),
   // 垂直间距
-  vspace: (25pt, 14pt),
-  indent: (0pt, 18pt, 28pt),
+  vspace: (9.31pt, 10.8pt),
+  // vspace: (1.25*15.6pt-0.7em, 10.8pt),
+  indent: (0pt, 2em, 2em),
   // 全都显示点号
   fill: (auto,),
   ..args,
@@ -29,7 +30,7 @@
   // 1.  默认参数
   fonts = 字体 + fonts
   if (title-text-args == auto) {
-    title-text-args = (font: fonts.宋体, size: 字号.三号, weight: "bold")
+    title-text-args = (font: fonts.黑体, size: 字号.三号, weight: 500)
   }
   // 引用页数的字体，这里用于显示 Times New Roman
   if (reference-font == auto) {
@@ -42,7 +43,7 @@
 
   // 2.  正式渲染
   pagebreak(weak: true, to: if twoside { "odd" })
-
+  v(24.5pt)
   // 默认显示的字体
   set text(font: reference-font, size: reference-size)
 

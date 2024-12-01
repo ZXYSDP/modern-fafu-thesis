@@ -1,8 +1,8 @@
 #import "@preview/pinit:0.1.3": pin, pinit-place
 #import "../utils/style.typ": 字号, 字体
 #import "../utils/indent.typ": fake-par
+#import "../utils/custom-heading.typ": heading-display, active-heading, current-heading
 #import "../utils/double-underline.typ": double-underline
-#import "../utils/custom-tablex.typ": gridx, colspanx
 #import "../utils/invisible-heading.typ": invisible-heading
 
 // 研究生英文摘要页
@@ -18,7 +18,7 @@
   keywords: (),
   outline-title: "ABSTRACT",
   outlined: true,
-  abstract-title-weight: "regular",
+  abstract-title-weight: "medium",
   stoke-width: 0.5pt,
   info-value-align: center,
   info-inset: (x: 0pt, bottom: 0pt),
@@ -29,6 +29,7 @@
   anonymous-info-keys: ("author-en", "supervisor-en", "supervisor-ii-en"),
   leading: 1.27em,
   spacing: 1.27em,
+  reset-footnote: true,
   body,
 ) = {
   // 1.  默认参数
@@ -74,65 +75,160 @@
       ),
     )
   }
+  
 
   // 4.  正式渲染
   pagebreak(weak: true, to: if twoside { "odd" })
 
   [
+  //       #set page(..(if false {
+  //   (
+  //     header: {
+  //       // 重置 footnote 计数器
+  //       if true {
+  //         counter(footnote).update(0)
+  //       }
+        
+  //       locate(loc => {
+  //         // 5.1 获取当前页面的一级标题
+  //         let cur-heading = current-heading(level: 1, loc)
+  //         // 5.2 如果当前页面没有一级标题，则渲染页眉
+  //         if not false or cur-heading == none {
+  //           if auto == auto {
+  //             // 一级标题和二级标题
+  //             let first-level-heading = if not twoside or calc.rem(loc.page(), 2) == 0 { heading-display(active-heading(level: 1, loc)) } else { "" }
+  //             let second-level-heading = if not twoside or calc.rem(loc.page(), 2) == 1 { heading-display(active-heading(level: 1, prev: false, loc)) } else { "" }
+  //             set text(font: fonts.宋体, size: 字号.五号)
+  //             // stack(
+  //                if calc.even(loc.page()) {
+  //                   // h(1fr)+info.title+h(1fr)
+  //               } else{
+  //                 // h(1fr)+second-level-heading+h(1fr)
+  //               }
+  //               v(-9pt)
+  //               if first-level-heading != "" or second-level-heading != "" { 
+  //                 // line(length: 100%, stroke: 0.5pt + black) 
+  //                 }
+  //             // )
+  //           } else {
+  //             header-render(loc)
+  //           }
+  //           v(1pt)
+  //         }
+  //       })
+  //     },
+  //   header-ascent: 20%,
+  //   footer-descent: 18%,
+  //   )
+
+  // } else {
+  //   (
+  //     header: {
+  //       // 重置 footnote 计数器
+  //       if reset-footnote {
+  //         counter(footnote).update(0)
+  //       }
+  //     }
+  //   )
+  // }), 
+  //   footer: context [
+  //   #set align(center)
+  //   #set text(10.5pt)
+  //   #counter(page).display(
+  //     "I",)
+  //     #counter(page).update(0)
+  // ],    
+  //   header-ascent: 20%,
+  //   footer-descent: 18%,
+  
+  // )
+  // #set page(
+  //     ..(
+  //       if true {
+  //         (
+  //           header: context {
+  //             if true {
+  //               counter(footnote).update(0)
+  //             }
+  //             let cur-heading = current-heading(level: 1)
+  //             if not false or cur-heading == none {
+  //               if auto == auto {
+  //                 let first-level-heading = if not twoside or calc.rem(here().page(), 2) == 0 {
+  //                   heading-display(active-heading(level: 1))
+  //                 } else {
+  //                   ""
+  //                 }
+  //                 let second-level-heading = if not twoside or calc.rem(here().page(), 2) == 1 {
+  //                   heading-display(active-heading(level: 1, prev: false))
+  //                 } else {
+  //                   ""
+  //                 }
+  //                 set text(font: fonts.宋体, size: 字号.五号)
+  //                 if calc.even(here().page()) {
+  //                   // h(1fr)+info.title+h(1fr)
+  //                 } else {
+  //                   // h(1fr)+second-level-heading+h(1fr)
+  //                 }
+  //                 // first-level-heading + h(1fr) + second-level-heading
+  //                 v(-9pt)
+  //                 if first-level-heading != "" or second-level-heading != "" {
+  //                   //  line(length: 100%, stroke: stroke-width + black)
+  //                 }
+  //                 // )
+  //               } else {
+  //                 header-render(here())
+  //               }
+  //               v(1pt)
+  //             }
+  //           },
+  //           header-ascent: 20%,
+  //           footer-descent: 18%,
+  //         )
+
+  //       } else {
+  //         (
+  //           header: {
+  //             // 重置 footnote 计数器
+  //             if reset-footnote {
+  //               counter(footnote).update(0)
+  //             }
+  //           },
+  //         )
+  //       }
+  //     ),
+  //     footer: context [
+  //       #counter(footnote).update(0)
+  //       #set align(center)
+  //       #set text(10.5pt)
+  //       #counter(page).display("I")
+  //     ],
+  //   )
     #set text(font: fonts.楷体, size: 字号.四号)
-    #set par(leading: leading, justify: true)
-    #show par: set block(spacing: spacing)
+    #set par(leading: leading,spacing: spacing, justify: true)
 
     // 标记一个不可见的标题用于目录生成
     #invisible-heading(level: 1, outlined: outlined, outline-title)
 
-    #align(center)[
-      #set text(size: 字号.小二, weight: "bold")
+    #v(23pt)
 
-      #v(8pt)
+    #align(center, text(font: fonts.宋体, size: 字号.三号, weight: 700, "ABSTRACT"))
 
-      #double-underline((if not anonymous { "南京大学" }) + "研究生毕业论文英文摘要首页用纸")
+    #v(9pt)
 
-      #v(-5pt)
-    ]
-
-    #gridx(
-      columns: (56pt, auto, auto, 1fr),
-      inset: grid-inset,
-      column-gutter: column-gutter,
-      row-gutter: row-gutter,
-      info-key[#pin("title-en")THESIS:], colspanx(3, info-value("", " ")),
-      colspanx(4, info-value("", " ")),
-      colspanx(3, info-key[SPECIALIZATION:]), info-value("major-en", info.major-en),
-      colspanx(3, info-key[POSTGRADUATE:]), info-value("author-en", info.author-en),
-      colspanx(2, info-key[MENTOR:]), colspanx(2, info-value("supervisor-en", info.supervisor-en + if info.supervisor-ii-en != "" { h(1em) + info.supervisor-ii-en })),
-    )
-
-    // 用了很 hack 的方法来实现不规则表格长标题换行...
-    #pinit-place("title-en", {
-      set text(font: fonts.楷体, size: 字号.四号)
-      set par(leading: 1.3em)
-      h(58pt) + (("",)+ info.title-en).intersperse(" ").sum()
-    })
-
-    #v(3pt)
-
-    #align(center, text(font: fonts.黑体, size: 字号.小三, weight: abstract-title-weight, "ABSTRACT"))
-
-    #v(-5pt)
-
-    #set text(font: fonts.楷体, size: 字号.小四)
+    #set text(font: fonts.宋体, size: 字号.四号)
 
     #[
-      #set par(first-line-indent: 2em)
+      #set par(first-line-indent: 2em, leading: 1.33 * 15.6pt - 0.7em, spacing: 1.25 * 15.6pt - 0.7em,justify: true)
 
       #fake-par
       
       #body
     ]
 
-    #v(10pt)
+    #v(14pt)
 
-    KEYWORDS: #(("",)+ keywords.intersperse("; ")).sum()
+    *KEY WORDS*: #(("",)+ keywords.intersperse(", ")).sum()
   ]
-}
+  // pagebreak(weak: false)
+
+  }

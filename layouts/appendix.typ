@@ -1,6 +1,6 @@
 #import "@preview/i-figured:0.2.4"
 #import "../utils/custom-numbering.typ": custom-numbering
-
+// #import "@preview/anti-matter:0.1.1": fence,anti-matter
 // 后记，重置 heading 计数器
 #let appendix(
   numbering: custom-numbering.with(first-level: "", depth: 4, "1.1 "),
@@ -21,4 +21,5 @@
   // 设置 equation 的编号
   show math.equation.where(block: true): show-equation
   it
+
 }

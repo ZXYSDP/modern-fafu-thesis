@@ -1,8 +1,8 @@
 #import "@preview/pinit:0.1.3": pin, pinit-place
 #import "../utils/style.typ": 字号, 字体
 #import "../utils/indent.typ": fake-par
+#import "../utils/custom-heading.typ": heading-display, active-heading, current-heading
 #import "../utils/double-underline.typ": double-underline
-#import "../utils/custom-tablex.typ": gridx, colspanx
 #import "../utils/invisible-heading.typ": invisible-heading
 
 // 研究生中文摘要页
@@ -16,9 +16,9 @@
   info: (:),
   // 其他参数
   keywords: (),
-  outline-title: "中文摘要",
+  outline-title: "摘　要",
   outlined: true,
-  abstract-title-weight: "regular",
+  abstract-title-weight: "medium",
   stoke-width: 0.5pt,
   info-value-align: center,
   info-inset: (x: 0pt, bottom: 0pt),
@@ -77,63 +77,97 @@
   }
 
   // 4.  正式渲染
-  pagebreak(weak: true, to: if twoside { "odd" })
+  pagebreak(
+    weak: true,
+    to: if twoside {
+      "odd"
+    },
+  )
 
   [
-    #set text(font: fonts.楷体, size: 字号.四号)
-    #set par(leading: leading, justify: true)
-    #show par: set block(spacing: spacing)
+    #set page(
+      ..(
+        if true {
+          (
+            header: context {
+              if true {
+                counter(footnote).update(0)
+              }
+              let cur-heading = current-heading(level: 1)
+              if not false or cur-heading == none {
+                if auto == auto {
+                  let first-level-heading = if not twoside or calc.rem(here().page(), 2) == 0 {
+                    heading-display(active-heading(level: 1))
+                  } else {
+                    ""
+                  }
+                  let second-level-heading = if not twoside or calc.rem(here().page(), 2) == 2 {
+                    heading-display(active-heading(level: 1, prev: false))
+                  } else {
+                    ""
+                  }
+                  set text(font: fonts.宋体, size: 字号.五号)
+                  if calc.even(here().page()) {
+                    // h(1fr)+info.title+h(1fr)
+                  } else {
+                    // h(1fr)+second-level-heading+h(1fr)
+                  }
+                  // first-level-heading + h(1fr) + second-level-heading
+                  v(-9pt)
+                  if first-level-heading != "" or second-level-heading != "" {
+                    //  line(length: 100%, stroke: stroke-width + black)
+                  }
+                  // )
+                } else {
+                  header-render(here())
+                }
+                v(1pt)
+              }
+            },
+            header-ascent: 20%,
+            footer-descent: 18%,
+          )
+
+        } else {
+          (
+            header: {
+              // 重置 footnote 计数器
+              if reset-footnote {
+                counter(footnote).update(0)
+              }
+            },
+          )
+        }
+      ),
+      footer: context [
+        #set align(center)
+        #set text(10.5pt)
+        #counter(page).display("I")
+      ],
+    )
+    #set text(font: fonts.宋体, size: 字号.四号)
+    #set par(leading: leading, spacing: spacing, justify: true)
 
     // 标记一个不可见的标题用于目录生成
     #invisible-heading(level: 1, outlined: outlined, outline-title)
 
-    #align(center)[
-      #set text(size: 字号.小二, weight: "bold")
+    #v(25pt)
 
-      #v(8pt)
+    #align(center, text(font: fonts.黑体, size: 字号.三号, weight: 700, "摘　要"))
 
-      #double-underline((if not anonymous { "南京大学" }) + "研究生毕业论文中文摘要首页用纸")
+    #v(9pt)
 
-      #v(-5pt)
-    ]
-
-    #gridx(
-      columns: (104pt, 1fr, auto, 1fr, auto, 1.5fr),
-      inset: grid-inset,
-      column-gutter: column-gutter,
-      row-gutter: row-gutter,
-      info-key[#pin("title")毕业论文题目：], colspanx(5, info-value("", " ")),
-      colspanx(6, info-value("", " ")),
-      colspanx(2, info-value("major", info.major)), info-key[专业],
-      info-value("grade", info.grade), info-key(if type == "doctor" { [级硕士生姓名：] } else { [级博士生姓名：] } ), info-value("author", info.author),
-      colspanx(2, info-key[指导教师（姓名、职称）：]), colspanx(4, info-value("supervisor", info.supervisor.at(0) + " " + info.supervisor.at(1) + if info.supervisor-ii != () { h(1em) + info.supervisor-ii.at(0) + " " + info.supervisor-ii.at(1) })),
-    )
-
-    // 用了很 hack 的方法来实现不规则表格长标题换行...
-    #pinit-place("title", {
-      set text(font: fonts.楷体, size: 字号.四号)
-      set par(leading: 1.3em)
-      h(108pt) + (("",)+ info.title).sum()
-    })
-
-    #v(3pt)
-
-    #align(center, text(font: fonts.黑体, size: 字号.小三, weight: abstract-title-weight, "摘　　要"))
-
-    #v(-5pt)
-
-    #set text(font: fonts.楷体, size: 字号.小四)
+    #set text(font: fonts.宋体, size: 字号.四号)
 
     #[
-      #set par(first-line-indent: 2em)
+      #set par(first-line-indent: 2em, leading: 1.45 * 15.6pt - 0.7em, spacing: 1.35 * 15.6pt - 0.7em, justify: true)
 
       #fake-par
-      
+
       #body
     ]
-
-    #v(10pt)
-
-    *关键词*：#(("",)+ keywords.intersperse("；")).sum()
+    #v(14pt)
+    // #parbreak()
+    *关键词*：#(("",)+ keywords.intersperse("，")).sum()
   ]
 }
