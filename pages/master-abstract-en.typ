@@ -203,7 +203,7 @@
   //       #counter(page).display("I")
   //     ],
   //   )
-    #set text(font: fonts.楷体, size: 字号.四号)
+    #set text(font: fonts.楷体, size: 字号.五号)
     #set par(leading: leading,spacing: spacing, justify: true)
 
     // 标记一个不可见的标题用于目录生成
