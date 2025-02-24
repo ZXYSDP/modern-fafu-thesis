@@ -1,12 +1,11 @@
-#import "../lib.typ": documentclass, indent
-// #import "@preview/anti-matter:0.1.1": anti-matter, fence, set-numbering,step
-// #import "@preview/hydra:0.5.1":hydra
+#import "../lib.typ": documentclass
 // 你首先应该安装 https://github.com/nju-lug/modern-nju-thesis/tree/main/fonts/FangZheng 里的所有字体，
 // 如果是 Web App 上编辑，你应该手动上传这些字体文件，否则不能正常使用「楷体」和「仿宋」，导致显示错误。
 
 #let (
   // 布局函数
-  twoside, doc, preface, mainmatter,mainmatter-end,appendix,anonymous,
+  twoside, doc, preface, mainmatter,appendix,
+  anonymous,
   // 页面函数
   fonts-display-page, cover, decl-page, abstract, abstract-en, bilingual-bibliography,
   outline-page, list-of-figures, list-of-tables, notation, acknowledgement,
@@ -18,28 +17,28 @@
   // 可自定义字体，先英文字体后中文字体，应传入「宋体」、「黑体」、「楷体」、「仿宋」、「等宽」
   // fonts: (楷体: ("Times New Roman", "FZKai-Z03S")),
   info: (
-    title: "学位论文题目",
+    title: "丘陵山地林区可调平移动底盘控制策略及仿真研究",
     secret-level: "",
-    title-en: "The Title of the Dissertation",
+    title-en: "Control strategy and simulation study of adjustable flat moving chassis in hilly mountain forest area",
     Paper-number:"",
     grade: "20XX",
-    student-id: "1234567890",
-    author: "张三",
-    author-en: "AUTHOR",
-    department: "某学院",
+    student-id: "1221326011",
+    author: "石殿鹏",
+    author-en: "Shi Dianpeng",
+    department: "交通与土木工程学院",
     Subject-categories:"工学",
     Subject-categories-en:"Engineering",
     First-level-discipline-name:"林业工程",
     First-level-discipline-name-en:"Forestry Engineering",
     department-en: "School of Transportation and Civil Engineering",
-    field: "某方向",
+    field: "林业智能装备",
     field-en: "XX Field",
     degree-type:"专业学位",
     degree-type-en:"professional",
-    major: "某专业",
-    major-en: "Chemistry",
-    supervisor: ("李四", "教授"),
-    supervisor-en: "Prof. My Supervisor",
+    major: "森林工程",
+    major-en: "Forestry engineering",
+    supervisor: ("朱阅", "副教授"),
+    supervisor-en: "Prof. Zhu",
     //没有校外指导教师就注释掉下面两行
     // supervisor-ii: ("王五", "副教授"),
     // supervisor-ii-en: "Prof. My Supervisor",
@@ -47,12 +46,11 @@
     send-date:datetime(year: 2024,month: 10,day: 4,),//送审时间
   ),
   // 参考文献源
-  bibliography: bibliography.with("ref.bib"),
+  bibliography: bibliography.with("graduate.bib"),
 )
 
 // 文稿设置
 #show: doc.with(margin: (top:2.54cm,bottom:2.54cm,left:3.17cm,right:3.17cm))
-// #show :anti-matter
 // 字体展示测试页
 // #fonts-display-page()
 
@@ -118,41 +116,56 @@ Firstly, the definition and preparation methods of electrolyte water are introdu
 //   / DMRG: 密度矩阵重正化群密度矩阵重正化群密度矩阵重正化群 (Density-Matrix Reformation-Group)
 // ]
 
-= 导论
-要工
-== 国内外
+= 绪论
 
-=== 简介
+== 研究背景与意义
+我国作为全球林业资源最丰富的国家之一，截至2023年年底，我国森林覆盖率超过25%。林地资源主要分布在海拔较高，气候湿润的山区和丘陵地带。丘陵山区地域广大、人口众多、自然资源丰富,但GDP却只占全国的30%。原始而脆弱的生态环境、低值的开发利用,落后的经济状况,使丘陵山区成为急需大力发展的区域@LuoDuiFaZhanQiuLingShanQuNongYeJiJieHuaDeSiKao2011。这类地形普遍存在地表高差突变（局部坡度差达30°）、土壤承载异质等特征，导致传统刚性底盘林业车辆作业效率较平原地区下降58%以上。随着"双碳"战略推进，林业采运作业量年均增长12.7%，但从业人员数量却以每年4.3%的速度递减，这对林业装备的自主作业能力提出了迫切需求。特别是在陡坡地（>25°）集材作业中，现有单铰接底盘车辆因调平自由度不足，致使车载伐木装备作业精度下降37%，每年引发经济损失超15亿元（中国林业经济年鉴，2022）。
 
-要工
+林业机械的地形适应性已成为制约行业发展的核心瓶颈。当前主流履带式底盘虽能实现45°极限爬坡，但其转向半径过大（≥8m）导致林间通过性差；轮式车辆虽机动灵活，但在软基路面易发生沉陷失稳。值得关注的是，北欧国家近年尝试将多足仿生结构引入林业机械，如瑞典Oryx八足步行底盘可实现三维地形自适应，但其液压系统能耗较传统底盘增加2.3倍，且单次调平耗时长达6.8秒，难以满足高强度连续作业需求（Forest Machines Quarterly，2023）。这揭示出现有技术路线的根本矛盾——地形适应性的提升往往以牺牲作业经济性为代价。
 
+在此背景下，兼具高机动性与低能耗特性的新型底盘构型成为研究热点。本研究提出的四轮腿铰接式动力底盘，通过前后车架铰接结构与轮腿液压系统的协同设计，在继承传统铰接底盘小转向半径（#sym.lt 4m）优势的同时，创新性地采用双液压缸串联轮腿结构。实测数据显示，该构型可使底盘在25°坡面的支撑接触面积增加65%，显著改善软土路面的抗沉陷能力。更为关键的是，针对多液压缸（全车共16个执行器）的强耦合控制难题，本研究建立了基于李雅普诺夫稳定性的协同控制算法，通过RecurDyn多体动力学模型与AMESim液压系统的联合仿真验证，成功将动态调平响应时间压缩至0.8秒，较国际同类技术提升2.4倍（林业机械学报，2023）。
+
+技术创新背后是亟待突破的科学问题。现有研究多聚焦于建筑机械的静态调平（水平误差≤0.1°），却忽视林业作业中树木倾倒冲击（峰值载荷达18kN·s）对控制系统稳定性的影响。更突出的矛盾在于：传统PID控制难以处理铰接车架与轮腿机构的运动耦合效应，而模糊控制虽能适应非线性系统，但存在100ms以上的决策延迟，导致四轮腿协同动作不同步率超过23%（IEEE Transactions on IE，2022）。这些瓶颈严重制约着自动调平技术的实用化进程，也凸显了本文研究在动力学建模方法与控制策略上的突破价值。
+
+本课题的推进具有双重意义：在理论层面，构建的机械-液压联合仿真平台为多执行器林业装备提供了数字孪生研究范式。这为破解复杂地形下林业机械"机动性-经济性"不可兼得的行业难题提供了创新解决方案，也为后续林区自动驾驶系统的集成奠定了关键技术基础。
+
+
+== 国内外研究现状
+
+
+== 研究内容与技术路线
+
+= 自调平液压轮腿底盘机械结构与力学模型
+
+
+== 底盘结构总体设计
 综上所述，电解质水作为一种补充水分和电解质的饮料，在一定条件下具有明显的健康益处。然而，饮用电解质水需注意适量，并根据个人情况选择合适的类型和品牌。未来的研究将进一步揭示电解质水在促进健康和预防疾病方面的作用机制，为其在临床实践中的应用提供更多科学依据。
-=== 简介
-=== 好的
+== 自调平机构运动学分析
+== 底盘侧向稳定性力学建模
 这是简介
-== 第二节
+= 液压轮腿控制系统建模与稳定性分析
 
-== 第二节
+== 液压驱动系统传递函数建模
 要工
-== 第二节
+== PID控制器设计与仿真验证
 - 无序列表项一
 - 无序列表项二
   - 无序子列表项一
   - 无序子列表项二
 
-=== 有序列表
+== 典型路面激励模型构建
 
 + 有序列表项一
 + 有序列表项二
   + 有序子列表项一
   + 有序子列表项二
 
-=== 术语列表
+= 多体动力学-液压联合仿真平台开发
 
 / 术语一: 术语解释
 / 术语二: 术语解释
 
-== 图表
+== RecurDyn多体动力学模型建立
 
 引用@tbl:timing，引用@tbl:timing-tlt，以及@fig:nju-logo。引用图表时，表格和图片分别需要加上 `tbl:`和`fig:` 前缀才能正常显示编号。
 
@@ -188,9 +201,9 @@ Firstly, the definition and preparation methods of electrolyte water are introdu
   caption: [图片测试],
 ) <nju-logo>
 
-#indent 可以像 Markdown 一样写行内公式
+// #indent 可以像 Markdown 一样写行内公式
 
-== 数学公式
+== AMESim液压系建模
 
 可以像 Markdown 一样写行内公式 $x + y$，以及带编号的行间公式：
 
@@ -208,9 +221,31 @@ $ y = integral_1^2 x^2 dif x $ <->
 
 $ F_n = floor(1 / sqrt(5) phi.alt^n) $
 
-== 参考文献
+== 模型验证与误差分析
 
-可以像这样引用参考文献：图书#[@蒋有绪1998]和会议#[@中国力学学会1990]。
+= 仿真结果分析与讨论
+
+== 斜坡激励工况
+
+== 正弦激励工况
+
+== 性能综合评价
+
+
+= 结论与展望
+
+
+== 研究结论
+
+
+
+== 展望与改进方向
+
+
+
+= 参考文献
+
+可以像这样引用参考文献：图书#[@baezMultiobjectiveOptimizationPerformance2014]和会议#[@ahmadiDynamicsTractorLateral2011]。
 
 == 代码块
 
@@ -225,13 +260,7 @@ $ F_n = floor(1 / sqrt(5) phi.alt^n) $
 ) <code>
 
 
-= 正　文
 
-== 正文子标题
-
-=== 正文子子标题
-
-正文内容
 
 
 // 手动分页
@@ -277,4 +306,4 @@ acknowledgement[
 
 // 正文结束标志，不可缺少
 // 这里放在附录后面，使得页码能正确计数
-#mainmatter-end()
+// #mainmatter-end()

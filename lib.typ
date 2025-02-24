@@ -3,7 +3,7 @@
 // Repo: https://github.com/nju-lug/modern-nju-thesis
 // 在线模板可能不会更新得很及时，如果需要最新版本，请关注 Repo
 
-#import "@preview/anti-matter:0.0.2": anti-inner-end as mainmatter-end
+// #import "@preview/anti-matter:0.0.2": anti-inner-end as mainmatter-end
 // #import "@preview/anti-matter:0.1.1": anti-matter, fence, set-numbering,step
 #import "layouts/doc.typ": doc
 #import "layouts/preface.typ": preface
@@ -27,10 +27,10 @@
 #import "utils/bilingual-bibliography.typ": bilingual-bibliography
 #import "utils/custom-numbering.typ": custom-numbering
 #import "utils/custom-heading.typ": heading-display, active-heading, current-heading
-#import "utils/indent.typ": indent, fake-par
+// #import "utils/indent.typ": indent, fake-par
 #import "@preview/i-figured:0.2.4": show-figure, show-equation
 #import "utils/style.typ": 字体, 字号
-
+#let indent = h(2em)
 // 使用函数闭包特性，通过 `documentclass` 函数类进行全局信息配置，然后暴露出拥有了全局配置的、具体的 `layouts` 和 `templates` 内部函数。
 #let documentclass(
   doctype: "master",  // "bachelor" | "master" | "doctor" | "postdoc"，文档类型，默认为本科生 bachelor
@@ -46,7 +46,7 @@
   fonts = 字体 + fonts
   info = (
     title: "基于 Typst 的123",
-    title-en: "NJU Thesis Template for Typst",
+    title-en: "FAFU Thesis Template for Typst",
     Paper-number:"1234567890",
     grade: "20XX",
     student-id: "1234567890",
@@ -79,7 +79,7 @@
     udc: "544.4",
     secret-level: "公开",
     supervisor-contact: "福建农林大学 福建省福州市仓山区上下店路15号",
-    email: "xyz@smail.nju.edu.cn",
+    email: "xyz@fafu.edu.cn",
     school-code: "10389",
     degree: auto,
     degree-en: auto,
@@ -117,7 +117,6 @@
         mainmatter(
           twoside: twoside,
           display-header: true,
-           info: info + args.named().at("info", default: (:)),
           ..args,
           fonts: fonts + args.named().at("fonts", default: (:)),
         )
@@ -129,11 +128,11 @@
         )
       }
     },
-    mainmatter-end: (..args) => {
-      mainmatter-end(
-        ..args,
-      )
-    },
+    // mainmatter-end: (..args) => {
+    //   mainmatter-end(
+    //     ..args,
+    //   )
+    // },
     appendix: (..args) => {
       appendix(
         ..args,

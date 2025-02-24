@@ -4,26 +4,26 @@
   if (args.pos().len() > depth) {
     return
   }
-  if (first-level != auto and args.pos().len() == 1) {
-      if (first-level != "") {
+  if first-level != auto and args.pos().len() == 1 {
+      if first-level != "" {
           numbering(first-level, ..args)+ h(-0.3em)
       }
       return
   }
-  if (second-level != auto and args.pos().len() == 2) {
-      if (second-level != "") {
+  if second-level != auto and args.pos().len() == 2 {
+      if second-level != "" {
           numbering(second-level, ..args)+ h(-0.3em)
       }
       return
   }
-  if (third-level != auto and args.pos().len() == 3) {
-      if (third-level != "") {
+  if third-level != auto and args.pos().len() == 3 {
+      if third-level != "" {
           numbering(third-level, ..args)+ h(-0.3em)
       }
       return
   }
   // default
-  if (args.pos().len() >= base) {
+  if args.pos().len() >= base {
       numbering(format, ..(args.pos().slice(base - 1)))
       return
   }

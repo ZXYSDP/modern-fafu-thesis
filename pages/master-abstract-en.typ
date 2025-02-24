@@ -1,8 +1,8 @@
 #import "@preview/pinit:0.1.3": pin, pinit-place
 #import "../utils/style.typ": 字号, 字体
-#import "../utils/indent.typ": fake-par
+// #import "../utils/indent.typ": fake-par
 #import "../utils/custom-heading.typ": heading-display, active-heading, current-heading
-#import "../utils/double-underline.typ": double-underline
+// #import "../utils/double-underline.typ": double-underline
 #import "../utils/invisible-heading.typ": invisible-heading
 
 // 研究生英文摘要页
@@ -29,13 +29,13 @@
   anonymous-info-keys: ("author-en", "supervisor-en", "supervisor-ii-en"),
   leading: 1.27em,
   spacing: 1.27em,
-  reset-footnote: true,
+  // reset-footnote: true,
   body,
 ) = {
   // 1.  默认参数
   fonts = 字体 + fonts
   info = (
-    title-en: "NJU Thesis Template for Typst",
+    title-en: "FAFU Thesis Template for Typst",
     author-en: "Zhang San",
     department-en: "XX Department",
     major-en: "XX Major",
@@ -218,9 +218,9 @@
     #set text(font: fonts.宋体, size: 字号.四号)
 
     #[
-      #set par(first-line-indent: 2em, leading: 1.33 * 15.6pt - 0.7em, spacing: 1.25 * 15.6pt - 0.7em,justify: true)
+      #set par(first-line-indent:  (amount: 2em, all: true), leading: 1.33 * 15.6pt - 0.7em, spacing: 1.25 * 15.6pt - 0.7em,justify: true)
 
-      #fake-par
+      // #fake-par
       
       #body
     ]

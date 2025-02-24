@@ -1,10 +1,11 @@
 #import "@preview/pinit:0.1.3": pin, pinit-place
+#import "@preview/cuti:0.3.0": *
 #import "../utils/style.typ": 字号, 字体
-#import "../utils/indent.typ": fake-par
-#import "../utils/custom-heading.typ": heading-display, active-heading, current-heading
-#import "../utils/double-underline.typ": double-underline
+// #import "../utils/indent.typ": fake-par
+// #import "../utils/custom-heading.typ": heading-display, active-heading, current-heading
+// #import "../utils/double-underline.typ": double-underline
 #import "../utils/invisible-heading.typ": invisible-heading
-
+#show: show-cn-fakebold
 // 研究生中文摘要页
 #let master-abstract(
   // documentclass 传入的参数
@@ -85,67 +86,67 @@
   )
 
   [
-    #set page(
-      ..(
-        if true {
-          (
-            header: context {
-              if true {
-                counter(footnote).update(0)
-              }
-              let cur-heading = current-heading(level: 1)
-              if not false or cur-heading == none {
-                if auto == auto {
-                  let first-level-heading = if not twoside or calc.rem(here().page(), 2) == 0 {
-                    heading-display(active-heading(level: 1))
-                  } else {
-                    ""
-                  }
-                  let second-level-heading = if not twoside or calc.rem(here().page(), 2) == 2 {
-                    heading-display(active-heading(level: 1, prev: false))
-                  } else {
-                    ""
-                  }
-                  set text(font: fonts.宋体, size: 字号.五号)
-                  if calc.even(here().page()) {
-                    // h(1fr)+info.title+h(1fr)
-                  } else {
-                    // h(1fr)+second-level-heading+h(1fr)
-                  }
-                  // first-level-heading + h(1fr) + second-level-heading
-                  v(-9pt)
-                  if first-level-heading != "" or second-level-heading != "" {
-                    //  line(length: 100%, stroke: stroke-width + black)
-                  }
-                  // )
-                } else {
-                  header-render(here())
-                }
-                v(1pt)
-              }
-            },
-            header-ascent: 20%,
-            footer-descent: 18%,
-          )
+    // #set page(
+    //   ..(
+    //     if true {
+    //       (
+    //         header: context {
+    //           if true {
+    //             counter(footnote).update(0)
+    //           }
+    //           let cur-heading = current-heading(level: 1)
+    //           if not false or cur-heading == none {
+    //             if auto == auto {
+    //               let first-level-heading = if not twoside or calc.rem(here().page(), 2) == 0 {
+    //                 heading-display(active-heading(level: 1))
+    //               } else {
+    //                 ""
+    //               }
+    //               let second-level-heading = if not twoside or calc.rem(here().page(), 2) == 2 {
+    //                 heading-display(active-heading(level: 1, prev: false))
+    //               } else {
+    //                 ""
+    //               }
+    //               set text(font: fonts.宋体, size: 字号.五号)
+    //               if calc.even(here().page()) {
+    //                 // h(1fr)+info.title+h(1fr)
+    //               } else {
+    //                 // h(1fr)+second-level-heading+h(1fr)
+    //               }
+    //               // first-level-heading + h(1fr) + second-level-heading
+    //               v(-9pt)
+    //               if first-level-heading != "" or second-level-heading != "" {
+    //                 //  line(length: 100%, stroke: stroke-width + black)
+    //               }
+    //               // )
+    //             } else {
+    //               header-render(here())
+    //             }
+    //             v(1pt)
+    //           }
+    //         },
+    //         header-ascent: 20%,
+    //         footer-descent: 18%,
+    //       )
 
-        } else {
-          (
-            header: {
-              // 重置 footnote 计数器
-              if reset-footnote {
-                counter(footnote).update(0)
-              }
-            },
-          )
-        }
-      ),
-      footer: context [
-        #set align(center)
-        #set text(10.5pt)
-        #counter(page).display("I")
-      ],
-    )
-    #set text(font: fonts.宋体, size: 字号.四号)
+    //     } else {
+    //       (
+    //         header: {
+    //           // 重置 footnote 计数器
+    //           if reset-footnote {
+    //             counter(footnote).update(0)
+    //           }
+    //         },
+    //       )
+    //     }
+    //   ),
+    //   footer: context [
+    //     #set align(center)
+    //     #set text(10.5pt)
+    //     #counter(page).display("I")
+    //   ],
+    // )
+    // #set text(font: fonts.宋体, size: 字号.四号)
     #set par(leading: leading, spacing: spacing, justify: true)
 
     // 标记一个不可见的标题用于目录生成
@@ -157,17 +158,20 @@
 
     #v(9pt)
 
-    #set text(font: fonts.宋体, size: 字号.四号)
 
     #[
-      #set par(first-line-indent: 2em, leading: 1.45 * 15.6pt - 0.7em, spacing: 1.35 * 15.6pt - 0.7em, justify: true)
+    #set text(font: fonts.宋体, size: 字号.四号)
+      #set par(first-line-indent: (amount: 2em, all: true), leading: 1.45 * 15.6pt - 0.7em, spacing: 1.35 * 15.6pt - 0.7em, justify: true)
 
-      #fake-par
+      // #fake-par
 
       #body
     ]
     #v(14pt)
     // #parbreak()
-    *关键词*：#(("",)+ keywords.intersperse("，")).sum()
+    #[#set text(font: fonts.宋体, size: 字号.四号)
+      #fakebold[关键词]：#(("",)+ keywords.intersperse("，")).sum()
+    ]
+    
   ]
 }
