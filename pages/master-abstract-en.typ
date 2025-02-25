@@ -203,7 +203,7 @@
   //       #counter(page).display("I")
   //     ],
   //   )
-    #set text(font: fonts.楷体, size: 字号.五号)
+    // #set text(font: fonts.楷体, size: 字号.五号)
     #set par(leading: leading,spacing: spacing, justify: true)
 
     // 标记一个不可见的标题用于目录生成
@@ -211,13 +211,13 @@
 
     #v(23pt)
 
-    #align(center, text(font: fonts.宋体, size: 字号.三号, weight: 700, "ABSTRACT"))
+    #align(center, text(font: fonts.宋体, size: 字号.四号, weight: 700, "ABSTRACT"))
 
     #v(9pt)
 
     #set text(font: fonts.宋体, size: 字号.四号)
 
-    #[
+    #[#set text(font: fonts.宋体, size: 字号.五号)
       #set par(first-line-indent:  (amount: 2em, all: true), leading: 1.33 * 15.6pt - 0.7em, spacing: 1.25 * 15.6pt - 0.7em,justify: true)
 
       // #fake-par
@@ -226,8 +226,11 @@
     ]
 
     #v(14pt)
-
+    #[
+    #set text(font: fonts.宋体, size: 字号.五号)
     *KEY WORDS*: #(("",)+ keywords.intersperse(", ")).sum()
+    ]
+    
   ]
   // pagebreak(weak: false)
 

@@ -195,7 +195,6 @@ set page(numbering: "1")
                 [#set align(center)
                 #first-level-heading 
                 ]
-                // h(1fr) + first-level-heading + h(1fr)
               }
               // first-level-heading + h(1fr) + second-level-heading
               v(-9pt)

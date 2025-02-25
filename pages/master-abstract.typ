@@ -160,7 +160,7 @@
 
 
     #[
-    #set text(font: fonts.宋体, size: 字号.四号)
+    #set text(font: fonts.宋体, size: 字号.五号)
       #set par(first-line-indent: (amount: 2em, all: true), leading: 1.45 * 15.6pt - 0.7em, spacing: 1.35 * 15.6pt - 0.7em, justify: true)
 
       // #fake-par
@@ -169,7 +169,7 @@
     ]
     #v(14pt)
     // #parbreak()
-    #[#set text(font: fonts.宋体, size: 字号.四号)
+    #[#set text(font: fonts.宋体, size: 字号.五号)
       #fakebold[关键词]：#(("",)+ keywords.intersperse("，")).sum()
     ]
     

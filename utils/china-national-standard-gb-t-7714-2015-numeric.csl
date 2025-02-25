@@ -339,7 +339,7 @@
       <text macro="secondary-contributor"/>
       <text macro="edition"/>
       <text macro="publishing"/>
-      <text macro="url-doi"/>
+      <!-- <text macro="url-doi"/> -->
     </group>
   </macro>
   <!-- 专著中的析出文献 -->
@@ -358,7 +358,7 @@
       </group>
       <text macro="edition"/>
       <text macro="publishing"/>
-      <text macro="url-doi"/>
+      <!-- <text macro="url-doi"/> -->
     </group>
   </macro>
   <!-- 连续出版物 -->
@@ -368,8 +368,8 @@
       <text macro="title"/>
       <text macro="year-volume-issue"/>
       <text macro="publishing"/>
-      <text variable="URL"/>
-      <text variable="DOI" prefix="DOI:"/>
+      <!-- <text variable="URL"/>
+      <text variable="DOI" prefix="DOI:"/> -->
     </group>
   </macro>
   <!-- 连续出版物中的析出文献 -->
@@ -378,7 +378,7 @@
       <text macro="author"/>
       <text macro="title"/>
       <text macro="periodical-publishing"/>
-      <text macro="url-doi"/>
+      <!-- <text macro="url-doi"/> -->
     </group>
   </macro>
   <!-- 专利文献 -->
