@@ -117,6 +117,7 @@
         mainmatter(
           twoside: twoside,
           display-header: true,
+           info: info + args.named().at("info", default: (:)),
           ..args,
           fonts: fonts + args.named().at("fonts", default: (:)),
         )

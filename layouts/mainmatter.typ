@@ -66,9 +66,10 @@ set page(numbering: "1")
     heading-font = (fonts.黑体,)
   }
   // 1.2 处理 heading- 开头的其他参数
-  let heading-text-args-lists = args.named().pairs()
-    .filter((pair) => pair.at(0).starts-with("heading-"))
-    .map((pair) => (pair.at(0).slice("heading-".len()), pair.at(1)))
+  let heading-text-args-lists = args.named().pairs().filter(pair => pair.at(0).starts-with("heading-")).map(pair => (
+    pair.at(0).slice("heading-".len()),
+    pair.at(1),
+  ))
 
   // 2.  辅助函数
   let array-at(arr, pos) = {
@@ -89,7 +90,6 @@ set page(numbering: "1")
     it
     v(1.25 * 15.6pt - 0.7em, weak: true)
   }
-
   show raw: set text(font: fonts.等宽)
   // 3.2 脚注样式
   show footnote.entry: set text(font: fonts.宋体, size: 字号.五号)
@@ -203,7 +203,7 @@ set page(numbering: "1")
               }
               // )
             } else {
-              header-render(loc)
+              header-render(here())
             }
             v(header-vspace)
           }
