@@ -162,7 +162,11 @@ set page(numbering: "1")
     }
 
   }
-
+  show heading.where(level: 1): it => {
+  pagebreak(to: "odd", weak: true)
+  // pad(top: 2cm, it)
+  it
+}
   // 5.  处理页眉
   set page(..(
     if display-header {
@@ -223,6 +227,13 @@ set page(numbering: "1")
       )
     }
   ))
+    context {
+  if calc.even(here().page()){
+    set page(numbering: "I",header: none)
+    // counter(page).update(1)
+  pagebreak() + " "
+}
+}
   counter(page).update(1)
   it
 
