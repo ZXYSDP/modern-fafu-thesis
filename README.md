@@ -1,6 +1,6 @@
-# 南京大学学位论文 modern-nju-thesis
+# 福建农林大学学位论文 modern-fafu-thesis
 
-南京大学毕业论文（设计）的 Typst 模板，能够简洁、快速、持续生成 PDF 格式的毕业论文。[Typst Universe](https://typst.app/universe/package/modern-nju-thesis)
+福建农林大学毕业论文（设计）的 Typst 模板，能够简洁、快速、持续生成 PDF 格式的毕业论文。
 
 Typst 非官方中文交流群：793548390
 
